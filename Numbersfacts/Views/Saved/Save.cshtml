@@ -1,0 +1,63 @@
+﻿@using Numbersfacts.Models.ApiModels
+@model Numbersfacts.Models.ModelSaved
+
+@{
+    ViewData["Title"] = "Збережені";
+}
+
+<div class="text-center title" style="margin-top:50px; margin-bottom: 30px; font-family:'Comic Sans MS'; color: #05386b; margin-left:190px">
+    <h1 class="display-4" style=" font-size:40px; border-radius: 30px; background-color:white; width:700px; border: 1px solid #05386b"><strong>Збережені події</strong></h1>
+</div>
+<div class="card col-md-12" style="background-color:#e9e8e9; width:700px; margin-left:200px; margin-top:70px">
+    <form asp-action="Save" asp-controller="Saved" method="post">
+        <div class="mb-3">
+            <label class="form-label" style="font-size: 25px; color:#05386b">Введіть рік (від 0 до 2023) або період(2010-2020)</label>
+            <input type="text" asp-for="YearInput" class="form-control" style="font-size:20px; font-family:'Comic Sans MS'; text-align:center" />
+            <span asp-validation-for="YearInput" class="text-danger"></span>
+        </div>
+            <button class="btn btn-primary float-right" type="submit" style="font-size:20px">Пошук</button>
+    </form>
+</div>
+
+<div>
+    @{
+        if (@Model.Events != null)
+        {
+            if (@Model.Events.Count() != 0)
+            {
+                <div class="container" style="margin-top:1em; font-family: stext-alignif; font-size:22px; background: #e9e8e9; border: 3px solid #05386b">
+                    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light mb-3">
+                        <p style="margin-left: 40%"><strong>Рік: @Model.YearInput</strong></p>
+                    </nav>
+                    <nav>
+                        @{
+                            <p style="text-decoration: underline;">Рік:@Model.Events[0].Year</p>
+                            @for (int i = 0; i < Model.Events.Count(); i++)
+                            {
+                                if (i > 0)
+                                {
+                                    if (Model.Events[i - 1].Year != Model.Events[i].Year)
+                                    {
+                                        <p style="text-decoration: underline;">          Рік:@Model.Events[i].Year</p>
+                                    }
+                                }
+
+                                int a = i + 1;
+                                <p style="margin-top:50px"> @a. @Model.Events[i].Text    <a class="btn btn-primary float-right" asp-controller="Saved" asp-action="Delete" asp-route-id="@Model.Events[i].Id" asp-route-year="@Model.Events[i].Year" method="delete">Delete</a></p>
+                            }
+                        }
+                    </nav>
+                </div>
+            }
+        }
+    }
+</div>
+ 
+<div>
+    @if (@*Model.Events == null && *@Model.YearInput != null && Model.Events.Count() == 0)
+    {
+        <div class="container" style="margin-top:1em; font-family: stext-alignif; font-size:22px; background: #e9e8e9; border: 3px solid #05386b">
+            <p>Немає збереженого</p>
+        </div>
+    }
+</div>

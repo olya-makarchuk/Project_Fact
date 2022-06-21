@@ -1,0 +1,64 @@
+﻿@model Numbersfacts.Models.ModelYear;
+
+@{
+    ViewData["Title"] = "Події у цьому році";
+}
+
+<div>
+       <nav class="nav nav-pills flex-column flex-sm-row">
+            <a class="text-sm-center nav-link btn" style="color:#05386b; background-color:#ceecff; border: 1.3px solid #05386b; font-size:25px" asp-controller="Saved" asp-action="Save"><strong>Збережені події </strong></></a>
+       </nav>
+</div>
+
+<div class="text-center title" style="margin-top:50px; margin-bottom: 30px; font-family:'Comic Sans MS'; color: #05386b; margin-left:190px">
+    <h1 class="display-4" style=" font-size:40px; border-radius:30px; background-color:white; width:700px"><strong>Події, які відбулися у цьому році</strong></h1>
+</div>
+<div class="card col-md-12" style="background-color:#e9e8e9; width:700px; margin-left:200px; margin-top:70px">
+    <form asp-action="EventsYear" asp-controller="Events" method="post">
+        <div class="mb-3">
+            <label class="form-label" style="font-size: 25px; color:#05386b">Введіть рік (від 0 до 2023)</label>
+            <input type="text" asp-for="YearforEvents" class="form-control" style="font-size:20px; font-family:'Comic Sans MS'; text-align:center" />
+            <span asp-validation-for="YearforEvents" class="text-danger"></span>
+        </div>
+            <button class="btn btn-primary float-right" type="submit" style="font-size:20px">Пошук</button>
+    </form>
+</div>
+
+
+<div>
+    
+        @if (Model.Events != null)
+        {
+            <div class="container" style="margin-top:1em; font-family: stext-alignif; font-size:22px; background: #e9e8e9; border: 3px solid #05386b">
+                <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light mb-3">
+                    <p style="margin-left: 40%">Рік: @Model.YearforEvents</p>
+                </nav>
+                <div>
+                @if(@Model.YearforEvents!=null)
+                {
+                    Html.BeginForm("CreateYear", "Events");
+                    {
+                        <table>
+                            <tr>
+                                <td>
+                                    @for (int i = 0; i < Model.CheckIt.Count; i++)
+                                    {
+                                        <p> </p>
+                                        @Html.CheckBoxFor(m=>Model.CheckIt[i].IsCheck)
+                                        @Model.CheckIt[i].Name
+
+                                        @Html.HiddenFor(m=>Model.CheckIt[i].Name)
+                                        @Html.HiddenFor(m=>Model.YearforEvents)
+
+                                    }
+                                    <p><button class="btn btn-primary float-left" style="font-size:22px" type="submit">Зберегти</button></p>
+                                </td>
+                            </tr>
+                        </table>
+                    }
+                }
+                <p>@ViewBag.selectItems</p>
+                </div>
+            </div>
+        }   
+</div>

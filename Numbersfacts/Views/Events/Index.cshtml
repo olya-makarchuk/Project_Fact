@@ -1,0 +1,97 @@
+﻿@using Numbersfacts.Domain
+@model Numbersfacts.Models.ApiModels.ModelOnThisDay
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+@{
+    @if (Model != null)
+    {
+        Random rand = new Random();
+        int number = rand.Next(0, Model.events.Count() - 1);
+        var oneEvent = Model.events[number];
+        <div class="container" style="width: 800px; height:auto; margin-top:3em; font-family:stext-alignif; font-size:24px; background: #e9e8e9; border: 3px solid #05386b">
+            <nav >
+
+                <div class="clearfix" style="clear:both; display:table">
+                    <p style= "font-family:'Comic Sans MS'; color: #05386b; font-size:26px "><strong>Цей день в історії</strong></p>
+                    @if (Model.events[number].pages.Count != 0)
+                    {
+                        if (Model.events[number].pages[0].originalimage != null)
+                        {
+                            <img style="float:right" src="@Model.events[number].pages[0].originalimage.source" alt="Pineapple" width="170" height="170">
+                        }
+                    }
+                    @if (Model.events.Count() != 0)
+                    {
+                        <p>@Model.events[number].text (@Model.events[number].year)</p>
+                    }
+                    <p style="padding:20px 0px 10px 0px"><a class="text-sm-center  btn" style="color:#05386b; border: 1.3px solid #05386b; font-size:20px; width:160px; " href="#Events"><strong>Більше подій</strong></a>  
+                       <a class="text-sm-center  btn" style="color:#05386b; border: 1.3px solid #05386b; font-size:20px; width:160px; " href="#Holidays"><strong>Свята</strong></a>  
+                       <a class="text-sm-center  btn" style="color:#05386b; border: 1.3px solid #05386b; font-size:20px; width:160px; " href="#Births"><strong>Іменинники</strong></a></p>
+                    
+ 
+                    <div id="Events" class="Dialog">
+                    <div>
+	                    <a href="#close" title="Закрыть" class="close">X</a>
+	                    <h2><strong>Події</strong></h2>
+
+                            @for(int i=0; i<Model.events.Count(); i++)
+                            {
+                                int a = i + 1;
+                                <p>@a. @Model.events[i].text (@Model.events[i].year)</p>
+                            }
+                        </div>
+                    </div>
+
+                    <div id="Holidays" class="Dialog">
+                    <div>
+	                    <a href="#close" title="Закрыть" class="close">X</a>
+	                    <h2><strong>Свята</strong></h2>
+
+                            @for(int i=0; i<Model.holidays.Count(); i++)
+                            {
+                                int a = i + 1;
+                                <p>@a. @Model.holidays[i].text</p>
+                            }
+                        </div>
+                    </div>
+
+                    <div id="Births" class="Dialog">
+                    <div>
+	                    <a href="#close" title="Закрыть" class="close">X</a>
+	                    <h2><strong>Іменинники</strong></h2>
+
+                            @for(int i=0; i<Model.births.Count(); i++)
+                            {
+                                int a = i + 1;
+                                <p>@a. @Model.births[i].text (@Model.births[i].year)</p>
+                            }
+                        </div>
+                    </div>
+
+                </div>
+            </nav>
+        </div>
+    }
+}
+
+<div>
+       <nav class="nav nav-pills flex-column flex-sm-row" style="margin-left:180px">
+            <a class="text-sm-center nav-link btn" style="background-color:#05386b; font-size:22px; color:#edf5e1; margin-top:35px;  width: 250px; height:70px; margin-left:80px; border-radius: 50px 20px;" asp-controller="Events" asp-action="EventsYear"><strong>Події у цей рік</strong></a>
+            <a class="text-sm-center nav-link btn" style="background-color:#05386b; font-size:22px; color:#edf5e1; margin-top:35px;  width: 250px; height:70px; margin-left:20px; border-radius: 50px 20px;" asp-controller="NumberWord" asp-action="NumberFacts" method="get"><strong>Факти про числа</strong></a>
+       </nav>
+
+       <nav class="nav nav-pills flex-column flex-sm-row" style="margin-top:20px; margin-left:230px">
+            <a class="text-sm-center nav-link btn" style="background-color:#05386b; font-size:22px; color:#edf5e1; width: 250px;	height: auto; margin-left:80px; border-radius: 20px 50px;" asp-controller="Events" asp-action="BirthsDate" method="get"><strong>Дні народження відомих людей у цю дату</strong></a>
+            <a class="text-sm-center nav-link btn" style="background-color:#05386b; font-size:22px; color:#edf5e1; width: 250px; margin-top:30px; margin-left:20px;height: auto; border-radius: 20px 50px;" asp-controller="NumberWord" asp-action="Word" method="get"><strong>Значення слова</strong></a>
+
+       </nav>
+</div>
+
+
+
+
+

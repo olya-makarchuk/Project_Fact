@@ -1,0 +1,39 @@
+﻿@model Numbersfacts.Models.ModelWord;
+
+@{
+    ViewData["Title"] = "Значення слова";
+}
+
+
+<div class="text-center title" style="margin-top:50px; margin-bottom: 30px; font-family:'Comic Sans MS'; color: #05386b; margin-left:190px">
+    <h1 class="display-4" style=" font-size:40px; border-radius:30px; background-color:white; width:700px"><strong>Значення слова</strong></h1>
+</div>
+<div class="card col-md-12" style="background-color:#e9e8e9; width:700px; margin-left:200px; margin-top:70px">
+    <form asp-action="Word" asp-controller="NumberWord" method="post">
+        <div class="mb-3">
+            <label class="form-label" style="font-size: 25px; color:#05386b">Введіть слово</label>
+            <input type="text" asp-for="WordInput" class="form-control" style="font-size:20px; font-family:'Comic Sans MS'; text-align:center" />
+            <span asp-validation-for="WordInput" class="text-danger"></span>
+        </div>
+            <button class="btn btn-primary float-right" type="submit" style="font-size:20px">Пошук</button>
+    </form>
+</div>
+
+@{if(Model.Texts.Count != 0 &&  Model.WordInput !=null)
+{
+
+<div class="container" style="margin-top:1em; font-family: stext-alignif; font-size:28px; background: #e9e8e9; border: 3px solid #05386b">
+    <nav >
+        <p style="margin-left: 40%; font-size:30px; color:#05386b"><strong>Слово: @Model.WordInput</strong></p>
+    </nav>
+    <nav >
+                @for(int i=0; i<Model.Texts.Count; i++)
+                {
+                    int a = i + 1;
+                    <p>@a) @Model.Texts[i]</p>
+                }
+    </nav>
+</div>
+
+}}
+
