@@ -1,7 +1,7 @@
 C:\Users\olama\source\repos\Numbersfacts\Numbersfacts\bin\Debug\net5.0\publish\Numbersfacts.exe
 C:\Users\olama\source\repos\Numbersfacts\Numbersfacts\bin\Debug\net5.0\publish\wwwroot\css\site.css
 C:\Users\olama\source\repos\Numbersfacts\Numbersfacts\bin\Debug\net5.0\publish\wwwroot\favicon.ico
-C:\Users\olama\source\repos\Numbersfacts\Numbersfacts\bin\Debug\net5.0\publish\wwwroot\image\it.jpg
+C:\Users\olama\source\repos\Numbersfacts\Numbersfacts\bin\Debug\net5.0\publish\wwwroot\image\imageIT.jpg
 C:\Users\olama\source\repos\Numbersfacts\Numbersfacts\bin\Debug\net5.0\publish\wwwroot\js\site.js
 C:\Users\olama\source\repos\Numbersfacts\Numbersfacts\bin\Debug\net5.0\publish\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
 C:\Users\olama\source\repos\Numbersfacts\Numbersfacts\bin\Debug\net5.0\publish\wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map

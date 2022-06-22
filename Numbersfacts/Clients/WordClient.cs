@@ -23,7 +23,6 @@ namespace Numbersfacts.Clients
         public async Task<List<ModelDefinition>> Definitions(string word)
         {
             var response = await _client.GetAsync($"/v4/word.json/{word}/definitions?limit=10&api_key={key}");
-            //response.EnsureSuccessStatusCode();
             var list = new List<ModelDefinition>();
             if (response.IsSuccessStatusCode == false)
             {

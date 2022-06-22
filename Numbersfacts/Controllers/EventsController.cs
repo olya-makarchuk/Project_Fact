@@ -38,11 +38,6 @@ namespace Numbersfacts.Controllers
             return View(events);
         }
 
-        //public IActionResult Privacy()
-        //{
-        //    return View();
-        //}
-
         public async Task<IActionResult> CreateYear(ModelYear model)
         {
             foreach (var item in model.CheckIt)
@@ -152,7 +147,6 @@ namespace Numbersfacts.Controllers
             return model;
         }
 
-        //Event modelevent = new Event();
         [HttpGet("onthisday")]
         public async Task<ModelOnThisDay> OnDay()
         {

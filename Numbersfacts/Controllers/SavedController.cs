@@ -30,7 +30,6 @@ namespace Numbersfacts.Controllers
         public async Task<IActionResult> Save()
         {
 
-            // list.Add(modelsaved.YearInput.Split(' '));
             if (modelsaved.YearInput != null)
             {
                 var list = new List<string>();
@@ -46,7 +45,7 @@ namespace Numbersfacts.Controllers
                     foreach (Fact fact in modelfacts)
                     {
                         fact.Year = fact.Year.Replace(" ", string.Empty);
-                        if (fact.Year == model.YearInput)///
+                        if (fact.Year == model.YearInput)
                         {
                             model.Events.Add(fact);
                         }
@@ -150,11 +149,9 @@ namespace Numbersfacts.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(int id, string year)
         {
-            //modelsaved.YearInput = year;
             Fact model = new Fact();
             model.Id = id;
             await Delete_events(model);
-            //return Response.Redirect(Request.RawUrl);
             return Redirect("/Saved/Save");
         }
 
