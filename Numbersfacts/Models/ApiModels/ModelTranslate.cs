@@ -2,9 +2,14 @@
 
 namespace Numbersfacts.Models.ApiModels
 {
+    public class ResponseData
+    {
+        public string translatedText { get; set; }
+    }
+
     public class ModelTranslate
     {
-        public string TranslatedContent { get; set; }
+        public ResponseData responseData { get; set; }
     }
 
 }

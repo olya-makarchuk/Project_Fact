@@ -7,76 +7,78 @@
 
 
 @{
-    @if (Model != null)
+    @if (Model.events != null)
     {
         Random rand = new Random();
         int number = rand.Next(0, Model.events.Count() - 1);
         var oneEvent = Model.events[number];
-        <div class="container" style="width: 800px; height:auto; margin-top:3em; font-family:stext-alignif; font-size:24px; background: #e9e8e9; border: 3px solid #05386b">
+        <div class="container" style="width: 700px; height:auto; margin-top:3em; font-family:stext-alignif; font-size:24px; background: #e9e8e9; border: 3px solid #05386b">
             <nav >
 
                 <div class="clearfix" style="clear:both; display:table">
                     <p style= "font-family:'Comic Sans MS'; color: #05386b; font-size:26px "><strong>Цей день в історії</strong></p>
+                    <div style="margin-left:90%; padding-right:500px">
                     @if (Model.events[number].pages.Count != 0)
                     {
                         if (Model.events[number].pages[0].originalimage != null)
                         {
-                            <img style="float:right" src="@Model.events[number].pages[0].originalimage.source" alt="Pineapple" width="170" height="170">
+                            <img style="float:right" src="@Model.events[number].pages[0].originalimage.source" alt="Pineapple" width="180" height="180">
                         }
                     }
+                    </div>
+                    <div style="padding-right:200px">
                     @if (Model.events.Count() != 0)
                     {
-                        <p>@Model.events[number].text (@Model.events[number].year)</p>
+                         <p>@Model.events[number].text</p>
                     }
-                    <p style="padding:20px 0px 10px 0px"><a class="text-sm-center  btn" style="color:#05386b; border: 1.3px solid #05386b; font-size:20px; width:160px; " href="#Events"><strong>Більше подій</strong></a>  
-                       <a class="text-sm-center  btn" style="color:#05386b; border: 1.3px solid #05386b; font-size:20px; width:160px; " href="#Holidays"><strong>Свята</strong></a>  
-                       <a class="text-sm-center  btn" style="color:#05386b; border: 1.3px solid #05386b; font-size:20px; width:160px; " href="#Births"><strong>Іменинники</strong></a></p>
-                    
- 
-                    <div id="Events" class="Dialog">
-                    <div>
-	                    <a href="#close" title="Закрыть" class="close">X</a>
-	                    <h2><strong>Події</strong></h2>
-
-                            @for(int i=0; i<Model.events.Count(); i++)
-                            {
-                                int a = i + 1;
-                                <p>@a. @Model.events[i].text (@Model.events[i].year)</p>
-                            }
-                        </div>
                     </div>
-
-                    <div id="Holidays" class="Dialog">
-                    <div>
-	                    <a href="#close" title="Закрыть" class="close">X</a>
-	                    <h2><strong>Свята</strong></h2>
-
-                            @for(int i=0; i<Model.holidays.Count(); i++)
-                            {
-                                int a = i + 1;
-                                <p>@a. @Model.holidays[i].text</p>
-                            }
-                        </div>
-                    </div>
-
-                    <div id="Births" class="Dialog">
-                    <div>
-	                    <a href="#close" title="Закрыть" class="close">X</a>
-	                    <h2><strong>Іменинники</strong></h2>
-
-                            @for(int i=0; i<Model.births.Count(); i++)
-                            {
-                                int a = i + 1;
-                                <p>@a. @Model.births[i].text (@Model.births[i].year)</p>
-                            }
-                        </div>
-                    </div>
-
                 </div>
             </nav>
+            
+            <nav>
+                 <div>
+                        <button id="eventsbtn" style="margin-bottom:5px; font-family:'Comic Sans MS'; color: #05386b; border-radius: 40px 40px;">Всі події</button>
+                        <div id="eventsmodal" class="modal">
+
+                            <div class="modal-content" style="border: 5px solid #05386b">
+                                <span class="close">X</span>
+                                @for (int i = 0; i < Model.events.Count(); i++)
+                                {
+                                    int a = i + 1;
+                                    <p>@a. @Model.events[i].text  (@Model.events[i].year )</p>
+                                }
+                            </div>
+
+                        </div>
+                        <script>
+                            var eventmodal = document.getElementById('eventsmodal');
+
+                            var eventbtn = document.getElementById("eventsbtn");
+
+                            var eventspan = document.getElementsByClassName("close")[0];
+
+                            eventbtn.onclick = function() {
+                            eventmodal.style.display = "block";
+                            }
+
+                            eventspan.onclick = function() {
+                            eventmodal.style.display = "none";
+                            }
+
+                            window.onclick = function(event) {
+                            if (event.target == modal) {
+                            eventmodal.style.display = "none";
+                            }
+                            }
+                        </script>
+
+                        </div>
+            </nav>
+            
         </div>
     }
 }
+
 
 <div>
        <nav class="nav nav-pills flex-column flex-sm-row" style="margin-left:180px">

@@ -64,7 +64,7 @@ namespace Numbersfacts
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Events}/{action=Index}/{id?}");
+                    pattern: "{controller=Events}/{action=Index}");
             });
         }
     }

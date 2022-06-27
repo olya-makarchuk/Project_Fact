@@ -10,26 +10,27 @@ namespace Numbersfacts.Clients
 	public class TranslateClient
 	{
 		private HttpClient _client;
-		private static string _adress = $"https://languageomega.herokuapp.com";
+		private static string _adress = $"https://api.mymemory.translated.net";
 
-        public TranslateClient()
+
+		public TranslateClient()
 		{
 			_client = new HttpClient();
 			_client.BaseAddress = new Uri(_adress);
 		}
 
+
 		public async Task<List<string>> TextTransl(List<string> list)
 		{
 
 			HttpResponseMessage response;
-			for(int i = 0; i < list.Count; i++)
-            {
-				response = await _client.GetAsync($"/json?lang_one=en&lang_two=uk&content={list[i]}");
+			for (int i = 0; i < list.Count; i++)
+			{
+				response = await _client.GetAsync($"/get?q={list[i]}&langpair=en|uk");
 				response.EnsureSuccessStatusCode();
 				var content = response.Content.ReadAsStringAsync().Result;
 				var result = JsonConvert.DeserializeObject<ModelTranslate>(content);
-				list[i] = result.TranslatedContent;
-
+				list[i] = result.responseData.translatedText;
 			}
 			return list;
 
@@ -38,13 +39,15 @@ namespace Numbersfacts.Clients
 		{
 
 			HttpResponseMessage response;
-			response = await _client.GetAsync($"/json?lang_one=uk&lang_two=en&content={text}");
+			response = await _client.GetAsync($"/get?q={text}&langpair=uk|en");
 			response.EnsureSuccessStatusCode();
 			var content = response.Content.ReadAsStringAsync().Result;
 			var result = JsonConvert.DeserializeObject<ModelTranslate>(content);
-			text = result.TranslatedContent;
+			text=result.responseData.translatedText;
 			return text;
 
 		}
 	}
+
 }
+

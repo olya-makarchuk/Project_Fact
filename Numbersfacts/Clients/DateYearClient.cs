@@ -68,7 +68,7 @@ namespace Numbersfacts.Clients
 
         public async Task<ModelOnThisDay> OnThisDay(string date)
         {
-            var response = await _client.GetAsync($"/feed/v1/wikipedia/uk/onthisday/all/{date}");
+            var response = await _client.GetAsync($"/feed/v1/wikipedia/uk/onthisday/events/{date}");
             response.EnsureSuccessStatusCode();
 
             var content = response.Content.ReadAsStringAsync().Result;
@@ -76,6 +76,7 @@ namespace Numbersfacts.Clients
             var text = JsonConvert.DeserializeObject<ModelOnThisDay>(content);
 
             return text;
+
         }
 
     }

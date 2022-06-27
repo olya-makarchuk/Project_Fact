@@ -20,14 +20,14 @@ namespace Numbersfacts.Clients
             _client.BaseAddress = new Uri(_adress);
         }
 
-        public async Task<List<ModelDefinition>> Definitions(string word)
+        public async Task<List<ModelDefinition>> Definitions(string word, string wordinput)
         {
             var response = await _client.GetAsync($"/v4/word.json/{word}/definitions?limit=10&api_key={key}");
             var list = new List<ModelDefinition>();
             if (response.IsSuccessStatusCode == false)
             {
                 var model = new ModelDefinition();
-                model.text = $"Слово \"{word}\" незнайдено";
+                model.text = $"Слово \"{wordinput}\" незнайдено";
                 list.Add(model);
                 return list;
             }

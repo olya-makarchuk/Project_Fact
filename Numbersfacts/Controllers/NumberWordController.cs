@@ -15,8 +15,6 @@ using System.Threading.Tasks;
 
 namespace Numbersfacts.Controllers
 {
-    //[ApiController]
-    //[Route("HttpGet")]
     public class NumberWordController : Controller
     {
         private readonly NumberClient _numberClient;
@@ -62,10 +60,10 @@ namespace Numbersfacts.Controllers
         }
 
         [HttpGet("definition")]
-        public async Task<List<ModelDefinition>> WordDefinitions(string word)
+        public async Task<List<ModelDefinition>> WordDefinitions(string word, string wordinput)
         {
             var list = new List<ModelDefinition>();
-            list = await _wordClient.Definitions(word);
+            list = await _wordClient.Definitions(word, wordinput);
 
             return list;
         }
@@ -76,6 +74,13 @@ namespace Numbersfacts.Controllers
             var list = new List<string>();
             list = await _translateClient.TextTransl(text);
             return list;
+        }
+
+        [HttpGet("translate")]
+        public async Task<string> Translate(string text)
+        {
+            var transl = await _translateClient.TextTransl(text);
+            return transl;
         }
 
         [HttpGet]
@@ -92,8 +97,8 @@ namespace Numbersfacts.Controllers
             string wordEN = await _translateClient.TextTransl(model.WordInput);
             model.Texts = new List<string>();
             var def = new List<ModelDefinition>();
-            def = await WordDefinitions(wordEN);
-            foreach(var item in def)
+            def = await WordDefinitions(wordEN, model.WordInput);
+            foreach (var item in def)
             {
                 model.Texts.Add(item.text);
             }

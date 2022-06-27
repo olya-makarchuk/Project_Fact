@@ -32,10 +32,10 @@ namespace Numbersfacts.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var events = new ModelOnThisDay();
-            events = await OnDay();
+            var holidays = new ModelOnThisDay();
+            holidays = await OnDay();
 
-            return View(events);
+            return View(holidays);
         }
 
         public async Task<IActionResult> CreateYear(ModelYear model)
